@@ -10,31 +10,28 @@ set(CMAKE_CXX_EXTENSIONS FALSE)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
   list(APPEND XCFun_CXX_FLAGS
-    "-ffloat-store"
-    "-fno-rtti"
-    "-fno-exceptions"
-    )
-  list(APPEND XCFun_CXX_FLAGS_DEBUG
+    "-O2"
+    "-flto=auto"
+    "-ffat-lto-objects"
+    "-fexceptions"
+    "-g"
+    "-grecord-gcc-switches"
+    "-pipe"
     "-Wall"
-    "-O0"
-    "-g3"
-    "-Wextra"
-    "-Winit-self"
-    "-Woverloaded-virtual"
-    "-Wuninitialized"
-    "-Wmissing-declarations"
-    "-Wwrite-strings"
-    "-Wno-sign-compare"
-    "-Wno-implicit-fallthrough"
-    "-Wno-missing-field-initializers"
+    "-Werror=format-security"
+    "-Wp,-D_FORTIFY_SOURCE=2"
+    "-Wp,-D_GLIBCXX_ASSERTIONS"
+#   "-specs=/usr/lib/rpm/redhat/redhat-hardened-cc1"
+    "-fstack-protector-strong"
+#   "-specs=/usr/lib/rpm/redhat/redhat-annobin-cc1"
+    "-m64"
+    "-mtune=generic"
+    "-fasynchronous-unwind-tables"
+    "-fstack-clash-protection"
+    "-fcf-protection"
     )
-  list(APPEND XCFun_CXX_FLAGS_RELEASE
-    "-O3"
-    "-ffast-math"
-    "-funroll-loops"
-    "-ftree-vectorize"
-    "-Wno-unused"
-    )
+  list(APPEND XCFun_CXX_FLAGS_DEBUG)
+  list(APPEND XCFun_CXX_FLAGS_RELEASE)
   list(APPEND XCFun_CXX_FLAGS_COVERAGE
     "${CODE_COVERAGE_FLAGS}"
     )
